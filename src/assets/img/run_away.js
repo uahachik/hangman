@@ -1,0 +1,1 @@
+export default () => 'http://sweetclipart.com/multisite/sweetclipart/files/gingerbread-man-running-clipart.png'
