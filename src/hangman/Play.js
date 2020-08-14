@@ -36,9 +36,9 @@ const Play = ({ history, setStatus }) => {
   }
 
   const checkHanging = (e, inx) => {
-    const { name, value } = e.target;
-
-    setInputValue({...inputValue, [name]: value.toLowerCase() });
+    let { name, value } = e.target;
+    value = value.toLowerCase();
+    setInputValue({...inputValue, [name]: value });
 
     if (value !== phrase[inx + 1]) {
       if (attempt === 0) {
