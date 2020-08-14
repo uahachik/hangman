@@ -74,9 +74,7 @@ const Play = ({ history, setStatus }) => {
   
   return (
     <div className="play">
-      <div>
-        <img src={hangMan(attempt)} alt='gallows' />
-      </div>
+      <img src={hangMan(attempt)} alt='gallows' />
 
       <div style={{display: 'flex', alignItems: 'center'}}>
         <div style={{margin: '1px 16px 0 0'}}>{phrase[0]}</div>

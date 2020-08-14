@@ -12,12 +12,17 @@ button {
 	max-width: 250px;
 }
 
+h1 {
+	text-align: center;
+}
+
 @media (max-width: 576px) {
 	button {
 		height: 35px;
 		width: 50%;
 	}
 }
+
 .hangman {
 	width: 90vw;
 	margin: 0 auto;
@@ -39,6 +44,18 @@ button {
 	flex-flow: column;
 	justify-content: space-around;
 	align-items: center;
+}
+
+@media (max-width: 576px) {
+	.play {
+		justify-content: start;
+	}
+}
+
+@media (max-width: 576px) {
+	.play img {
+		width: 80%;
+	}
 }
 
 .play input {
