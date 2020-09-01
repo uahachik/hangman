@@ -23,7 +23,7 @@ const Hangman = () => {
             <Route
               exact
               path="/play"
-              component={props => <Play setStatus={setStatus}  {...props} />}
+              component={props => <Play setStatus={setStatus} {...props} />}
             />
 
             <Route

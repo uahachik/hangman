@@ -60,7 +60,6 @@ h1 {
 
 .play input {
 	width: 27px;
-	text-align: left;
 	border: 0;
 	font-size: 21px;
 	letter-spacing: 10px;
@@ -105,4 +104,44 @@ h1 {
 .button_block > button {
 	width: 40%;
 	max-width: 250px;
+}
+
+.display {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	width: 32px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1px 16px 0px 0px;
+	font-size: 32px;
+	position: relative;
+}
+/* .display:last-child {
+	border-right: none;
+} */
+
+.wrap {
+	/* border: 1px solid rgba(0, 0, 0, 0.2); */
+	display: inline-block;
+	position: relative;
+	display: flex;
+}
+
+.input {
+	position: absolute;
+	border: none;
+	font-size: 32px;
+	text-align: center;
+	background-color: transparent;
+	outline: none;
+}
+
+.shadows {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	box-shadow: 0 0 0 4px rgba(58, 151, 212, 0.28);
 }

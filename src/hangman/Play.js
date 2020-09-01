@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import './Hangman.css';
@@ -8,87 +8,119 @@ import phrases from '../phrases.json';
 
 const [phrase] = phrases.sort(() => Math.random() - 0.5).slice(0, 1);
 
-const initialValue = () => {
-  const initObj = {};
-  for (let i = 0; i < phrase.length + 1; i++) {
-    initObj[i] = '';
-  }
-  return initObj;
-}
+// const initialValue = () => {
+//   const initObj = {};
+//   for (let i = 0; i < phrase.length + 1; i++) {
+//     initObj[i] = '';
+//   }
+//   return initObj;
+// }
 
 const Play = ({ history, setStatus }) => {
   const [guessed, setGuessed] = useState(phrase[0]);
-  const [inputValue, setInputValue] = useState(initialValue());
+  // const [inputValue, setInputValue] = useState(initialValue());
   const [attempt, setAttempt] = useState(6);
-  console.log(phrase)
-  
+  console.log(phrase);
+
+  const [focused, setFocused] = useState(false);
+  const inputRef = useRef(null);
+  console.log('guessed', guessed);
+
   useEffect(() => {
     if (guessed === phrase.slice(0, -1)) {
       setStatus('You Won!');
       history.push('/result');
     }
-  }, [guessed, history, setStatus])
 
-  const handleFocus = inx => {
-    if (inx === 0 && inputValue[inx] === '') {
-      return true;
-    }
-  }
-
-  const checkHanging = (e, inx) => {
-    let { name, value } = e.target;
-    value = value.toLowerCase();
-    setInputValue({...inputValue, [name]: value });
-
-    if (value !== phrase[inx + 1]) {
-      if (attempt === 0) {
-        setStatus('You lost');
+    if (attempt === 0) {
+      setStatus('You lost');
+      // setTimeout(() => {
+        
         history.push('/result');
-      } else {
+      // }, 2000);
+    }
+  }, [guessed, history, setStatus, attempt]);
+
+  const checkHanging = e => {
+    const currValue = e.target.value;
+    // let { name, value } = e.target;
+    // value = value.toLowerCase();
+    // setInputValue({...inputValue, [name]: value });
+
+    console.log(phrase.slice(0, phrase.indexOf(phrase[guessed.length]) + 1))
+    console.log(phrase.indexOf(phrase[guessed.length]))
+    console.log(phrase[guessed.length])
+
+    if (currValue !== phrase[guessed.length]) {
+      // setGuessed(guessed + currValue);
+      // setTimeout(() => {
+      //   setGuessed(phrase.slice(0, phrase.indexOf(phrase[guessed.length])));
+      // }, 1000);
+      // if (attempt > 0) {
         setTimeout(() => {
           setAttempt(attempt - 1);
-          setInputValue({ ...inputValue, inx: '' });
         }, 1000);
-      }
+      // }
     } else {
-      setGuessed(guessed + value);
-
-      // ToDo dynamic focus
-      // dispatchEvent(new KeyboardEvent('keydown',{'key':'tab'}));
-      // document.activeElement.dispatchEvent(
-        //   new KeyboardEvent("keydown", {
-          //     key: "tab",
-          //     keyCode: 9, // example values.
-          //     code: "KeyE", // put everything you need in this object.
-          //     which: 9,
-          //     shiftKey: false, // you don't need to include values
-          //     ctrlKey: false,  // if you aren't going to use them.
-      //     metaKey: false   // these are here for example's sake.
-      //   })
-      // );
+      setGuessed(guessed + currValue);
     }
   }
 
   const guessedLine = new Array(phrase.length - 2);
   guessedLine.fill(null);
+
+  // const handleClick = () => {
+  //   console.log('clicked')
+    // inputRef.current.focus();
+  // };
+
+   const handleFocus = () => {
+    // if (guessed.length === 1) {
+      return true;
+    // } else {
+      // console.log(inx);
+    // }
+  }
+
+  const onFocus = () => {
+    setFocused(true);
+    // inputRef.current.focus();
+    // return true;
+  };
+  const handleBlur = () => {
+    setFocused(false);
+  };
   
   return (
     <div className="play">
-      <img src={hangMan(attempt)} alt='gallows' />
+      <img src={hangMan(attempt)} alt={hangMan(attempt)} />
 
       <div style={{display: 'flex', alignItems: 'center'}}>
         <div style={{margin: '1px 16px 0 0'}}>{phrase[0]}</div>
-        {guessedLine.map((_, inx) => (
-            <input
-              key={inx}
-              name={inx}
-              value={inputValue[inx]}
-              onChange={e => checkHanging(e, inx)}
-              maxLength="1" size="8" placeholder='_  '
-              autoFocus={handleFocus(inx)}
-            />
-          )
-        )}
+        <div className="wrap">
+          <input
+            value=""
+            // ref={inputRef}
+            onFocus={onFocus}
+            onBlur={handleBlur}
+            onChange={e => checkHanging(e)}
+            className="input"
+            style={{
+              width: 32,
+              top: 0,
+              bottom: 0,
+              left: (guessed.length - 1) * 48,
+            }}
+            autoFocus={true}
+            // maxLength="1"
+          />
+          {guessedLine.map((_, inx) => (
+            <div key={inx} className="display">
+              {guessed.slice(1, guessed.length).split('')[inx]}
+              {guessed.length -1 === inx && focused && <div className="shadows" />}
+            </div>
+          ))}
+        </div>
         <div style={{width: 50}}>{phrase.slice(phrase.length - 1)}</div>
       </div>
     </div>
@@ -100,7 +132,7 @@ Play.defaultProps = {
 }
 
 Play.propTypes = {
-  status: PropTypes.func,
+  setStatus: PropTypes.func,
 };
 
 export default Play;
