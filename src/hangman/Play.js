@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import './Hangman.css';
@@ -8,23 +8,11 @@ import phrases from '../phrases.json';
 
 const [phrase] = phrases.sort(() => Math.random() - 0.5).slice(0, 1);
 
-// const initialValue = () => {
-//   const initObj = {};
-//   for (let i = 0; i < phrase.length + 1; i++) {
-//     initObj[i] = '';
-//   }
-//   return initObj;
-// }
-
 const Play = ({ history, setStatus }) => {
   const [guessed, setGuessed] = useState(phrase[0]);
-  // const [inputValue, setInputValue] = useState(initialValue());
   const [attempt, setAttempt] = useState(6);
-  console.log(phrase);
-
   const [focused, setFocused] = useState(false);
-  const inputRef = useRef(null);
-  console.log('guessed', guessed);
+  console.log(phrase);
 
   useEffect(() => {
     if (guessed === phrase.slice(0, -1)) {
@@ -35,24 +23,17 @@ const Play = ({ history, setStatus }) => {
     if (attempt === 0) {
       setStatus('You lost');
       // setTimeout(() => {
-        
         history.push('/result');
       // }, 2000);
     }
   }, [guessed, history, setStatus, attempt]);
 
   const checkHanging = e => {
-    const currValue = e.target.value;
-    // let { name, value } = e.target;
-    // value = value.toLowerCase();
-    // setInputValue({...inputValue, [name]: value });
+    let { value } = e.target;
+    value = value.toLowerCase();
 
-    console.log(phrase.slice(0, phrase.indexOf(phrase[guessed.length]) + 1))
-    console.log(phrase.indexOf(phrase[guessed.length]))
-    console.log(phrase[guessed.length])
-
-    if (currValue !== phrase[guessed.length]) {
-      // setGuessed(guessed + currValue);
+    if (value !== phrase[guessed.length]) {
+      // setGuessed(guessed + value);
       // setTimeout(() => {
       //   setGuessed(phrase.slice(0, phrase.indexOf(phrase[guessed.length])));
       // }, 1000);
@@ -62,57 +43,41 @@ const Play = ({ history, setStatus }) => {
         }, 1000);
       // }
     } else {
-      setGuessed(guessed + currValue);
+      setGuessed(guessed + value);
     }
   }
 
   const guessedLine = new Array(phrase.length - 2);
   guessedLine.fill(null);
-
-  // const handleClick = () => {
-  //   console.log('clicked')
-    // inputRef.current.focus();
-  // };
-
-   const handleFocus = () => {
-    // if (guessed.length === 1) {
-      return true;
-    // } else {
-      // console.log(inx);
-    // }
-  }
-
-  const onFocus = () => {
-    setFocused(true);
-    // inputRef.current.focus();
-    // return true;
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
   
   return (
     <div className="play">
       <img src={hangMan(attempt)} alt={hangMan(attempt)} />
 
       <div style={{display: 'flex', alignItems: 'center'}}>
-        <div style={{margin: '1px 16px 0 0'}}>{phrase[0]}</div>
+        <div className="first_char">{phrase[0]}</div>
         <div className="wrap">
           <input
             value=""
-            // ref={inputRef}
-            onFocus={onFocus}
-            onBlur={handleBlur}
+            style={window.innerWidth > 917
+              ? {
+                width: 32,
+                top: 0,
+                bottom: 0,
+                left: (guessed.length - 1) * 48,
+              }
+              : {
+                width: 14,
+                top: 0,
+                bottom: 0,
+                left: (guessed.length - 1) * 20,
+              }
+            }
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             onChange={e => checkHanging(e)}
             className="input"
-            style={{
-              width: 32,
-              top: 0,
-              bottom: 0,
-              left: (guessed.length - 1) * 48,
-            }}
             autoFocus={true}
-            // maxLength="1"
           />
           {guessedLine.map((_, inx) => (
             <div key={inx} className="display">
@@ -121,7 +86,8 @@ const Play = ({ history, setStatus }) => {
             </div>
           ))}
         </div>
-        <div style={{width: 50}}>{phrase.slice(phrase.length - 1)}</div>
+
+        <div>{phrase.slice(phrase.length - 1)}</div>
       </div>
     </div>
   );

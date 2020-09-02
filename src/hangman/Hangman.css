@@ -16,7 +16,7 @@ h1 {
 	text-align: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 917px) {
 	button {
 		height: 35px;
 		width: 50%;
@@ -46,13 +46,13 @@ h1 {
 	align-items: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 917px) {
 	.play {
 		justify-content: start;
 	}
 }
 
-@media (max-width: 576px) {
+@media (max-width: 917px) {
 	.play img {
 		width: 60%;
 	}
@@ -65,7 +65,7 @@ h1 {
 	letter-spacing: 10px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 917px) {
 	.play input {
 		width: 27%;
 	}
@@ -77,6 +77,16 @@ h1 {
 
 .play div {
 	font-size: 21px;
+}
+
+.first_char {
+	margin: 1px 16px 0px 0px;
+}
+
+@media (max-width: 917px) {
+	.first_char {
+		margin: 1px 4px 0px 0px;
+	}
 }
 
 .result {
@@ -95,7 +105,7 @@ h1 {
 	justify-content: inherit;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 917px) {
 	.button_block {
 		width: 111%;
 	}
@@ -120,6 +130,14 @@ h1 {
 /* .display:last-child {
 	border-right: none;
 } */
+
+@media (max-width: 917px) {
+	.display {
+		width: 16px;
+		height: 30px;
+		margin: 1px 4px 0px 0px;
+	}
+}
 
 .wrap {
 	/* border: 1px solid rgba(0, 0, 0, 0.2); */
