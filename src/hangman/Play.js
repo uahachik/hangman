@@ -4,7 +4,7 @@ import './Hangman.css';
 
 import hangMan from './gallows';
 import phrases from '../phrases.json';
-import detectIOS from '../utils/detectIOS';
+// import detectIOS from '../utils/detectIOS';
 
 const [phrase] = phrases.sort(() => Math.random() - 0.5).slice(0, 1);
 
@@ -79,8 +79,8 @@ const Play = ({ history, setStatus }) => {
             value=""
             style={window.innerWidth > 917
               ? Object.assign(inputStyle, desktopInputStyle)
-              : !detectIOS()
-                ? Object.assign(inputStyle, mobileInputStyle)
+              // : !detectIOS()
+                // ? Object.assign(inputStyle, mobileInputStyle)
                 : Object.assign(inputStyle, mobileInputStyle, iosInputStyle)
             }
             onFocus={() => setFocused(true)}
