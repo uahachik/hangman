@@ -62,7 +62,11 @@ const Play = ({ history, setStatus }) => {
     left: (guessed.length - 1) * 20,
   }
 
-  const iosInputStyle = {caretColor: 'transparent'}
+  const iosInputStyle = {
+    // caretColor: 'transparent',
+    // left: (guessed.length - 1) * 10,
+    paddingRight: 7,
+  }
   
   return (
     <div className="play">
