@@ -56,16 +56,16 @@ const Play = ({ history, setStatus }) => {
     width: 32,
     left: (guessed.length - 1) * 48,
   }
-
+  
   const mobileInputStyle = {
     width: 14,
     left: (guessed.length - 1) * 20,
   }
-
+  
   const iosInputStyle = {
     // caretColor: 'transparent',
     // left: (guessed.length - 1) * 10,
-    paddingRight: 7,
+    marginLeft: '-10px',
   }
   
   return (
@@ -86,7 +86,6 @@ const Play = ({ history, setStatus }) => {
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={e => checkHanging(e)}
-            className="input"
             autoFocus={true}
           />
           {guessedLine.map((_, inx) => (
