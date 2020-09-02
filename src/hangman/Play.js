@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import './Hangman.css';
 
 import hangMan from './gallows';
 import phrases from '../phrases.json';
+import detectIOS from '../utils/detectIOS';
 
 const [phrase] = phrases.sort(() => Math.random() - 0.5).slice(0, 1);
 
 const Play = ({ history, setStatus }) => {
   const [guessed, setGuessed] = useState(phrase[0]);
   const [attempt, setAttempt] = useState(6);
-  const [focused, setFocused] = useState(false);
+  const [, setFocused] = useState(false);
   console.log(phrase);
 
   useEffect(() => {
@@ -49,6 +49,20 @@ const Play = ({ history, setStatus }) => {
 
   const guessedLine = new Array(phrase.length - 2);
   guessedLine.fill(null);
+
+  const inputStyle = {top: 0, bottom: 0,}
+
+  const desktopInputStyle = {
+    width: 32,
+    left: (guessed.length - 1) * 48,
+  }
+
+  const mobileInputStyle = {
+    width: 14,
+    left: (guessed.length - 1) * 20,
+  }
+
+  const iosInputStyle = {caretColor: 'transparent'}
   
   return (
     <div className="play">
@@ -60,18 +74,10 @@ const Play = ({ history, setStatus }) => {
           <input
             value=""
             style={window.innerWidth > 917
-              ? {
-                width: 32,
-                top: 0,
-                bottom: 0,
-                left: (guessed.length - 1) * 48,
-              }
-              : {
-                width: 14,
-                top: 0,
-                bottom: 0,
-                left: (guessed.length - 1) * 20,
-              }
+              ? Object.assign(inputStyle, desktopInputStyle)
+              : !detectIOS()
+                ? Object.assign(inputStyle, mobileInputStyle)
+                : Object.assign(inputStyle, mobileInputStyle, iosInputStyle)
             }
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
@@ -82,7 +88,7 @@ const Play = ({ history, setStatus }) => {
           {guessedLine.map((_, inx) => (
             <div key={inx} className="display">
               {guessed.slice(1, guessed.length).split('')[inx]}
-              {guessed.length -1 === inx && focused && <div className="shadows" />}
+              {guessed.length - 1 === inx && <div className="shadows" />}
             </div>
           ))}
         </div>
