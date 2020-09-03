@@ -63,7 +63,7 @@ const Play = ({ history, setStatus }) => {
   }
   
   const iosInputStyle = {
-    marginLeft: '-15px',
+    marginLeft: '-15.5px',
   }
   
   return (
