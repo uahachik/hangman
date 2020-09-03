@@ -63,9 +63,7 @@ const Play = ({ history, setStatus }) => {
   }
   
   const iosInputStyle = {
-    // caretColor: 'transparent',
-    // left: (guessed.length - 1) * 10,
-    marginLeft: '-20px',
+    marginLeft: '-16px',
   }
   
   return (
