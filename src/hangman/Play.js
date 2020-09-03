@@ -22,9 +22,7 @@ const Play = ({ history, setStatus }) => {
 
     if (attempt === 0) {
       setStatus('You lost');
-      // setTimeout(() => {
-        history.push('/result');
-      // }, 2000);
+      history.push('/result');
     }
   }, [guessed, history, setStatus, attempt]);
 
@@ -33,15 +31,7 @@ const Play = ({ history, setStatus }) => {
     value = value.toLowerCase();
 
     if (value !== phrase[guessed.length]) {
-      // setGuessed(guessed + value);
-      // setTimeout(() => {
-      //   setGuessed(phrase.slice(0, phrase.indexOf(phrase[guessed.length])));
-      // }, 1000);
-      // if (attempt > 0) {
-        // setTimeout(() => {
-          setAttempt(attempt - 1);
-        // }, 1000);
-      // }
+      setAttempt(attempt - 1);
     } else {
       setGuessed(guessed + value);
     }
@@ -62,9 +52,7 @@ const Play = ({ history, setStatus }) => {
     left: (guessed.length - 1) * 20,
   }
   
-  const iosInputStyle = {
-    marginLeft: '-15.5px',
-  }
+  const iosInputStyle = {marginLeft: '-15.5px',}
   
   return (
     <div className="play">
