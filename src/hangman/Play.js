@@ -63,13 +63,13 @@ const Play = ({ history, setStatus }) => {
   }
   
   const iosInputStyle = {
-    marginLeft: '-16px',
+    marginLeft: '-14px',
   }
   
   return (
     <div className="play">
       <img src={hangMan(attempt)} alt={hangMan(attempt)} />
-      {detectIOS() && <div>IOS</div>}
+      {/* {<div>task</div>} here will be a task */}
 
       <div style={{display: 'flex', alignItems: 'center'}}>
         <div className="first_char">{phrase[0]}</div>

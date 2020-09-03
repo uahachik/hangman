@@ -64,7 +64,6 @@ h1 {
 	text-align: center;
 	background-color: transparent;
 	border: none;
-	/* border: 0; */
 	font-size: 21px;
 	font-size: 32px;
 	letter-spacing: 10px;
@@ -78,7 +77,6 @@ h1 {
 }
 
 .play input:focus {
-	/* caret-color: transparent; */
 	outline: none;
 }
 
@@ -107,9 +105,6 @@ h1 {
 	font-size: 32px;
 	position: relative;
 }
-/* .display:last-child {
-	border-right: none;
-} */
 
 @media (max-width: 917px) {
 	.display {
@@ -120,7 +115,6 @@ h1 {
 }
 
 .wrap {
-	/* border: 1px solid rgba(0, 0, 0, 0.2); */
 	display: inline-block;
 	position: relative;
 	display: flex;
