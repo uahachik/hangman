@@ -38,9 +38,9 @@ const Play = ({ history, setStatus }) => {
       //   setGuessed(phrase.slice(0, phrase.indexOf(phrase[guessed.length])));
       // }, 1000);
       // if (attempt > 0) {
-        setTimeout(() => {
+        // setTimeout(() => {
           setAttempt(attempt - 1);
-        }, 1000);
+        // }, 1000);
       // }
     } else {
       setGuessed(guessed + value);
